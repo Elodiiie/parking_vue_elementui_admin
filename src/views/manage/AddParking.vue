@@ -1,0 +1,100 @@
+<template>
+  <div style="padding: 100px;overflow:auto;">
+    <el-form
+      ref="ruleForm"
+      :model="ruleForm"
+      :rules="rules"
+      label-width="100px"
+      class="demo-ruleForm"
+      style="width:40%"
+    >
+      <!--<el-form-item label="手机号" prop="phone" >-->
+      <!--<el-input v-model="ruleForm.phone" ></el-input>-->
+      <!--</el-form-item>-->
+      <el-form-item label="车牌" prop="carlicense">
+        <el-input v-model="ruleForm.carlicense" />
+      </el-form-item>
+      <el-form-item label="时间" required>
+        <div class="block">
+          <el-date-picker
+            v-model="ruleForm.time"
+            type="datetime"
+            placeholder="选择日期时间"
+            align="right"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            format="yyyy-MM-dd HH:mm:ss"
+          />
+        </div>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')">修改</el-button>
+        <el-button @click="resetForm('ruleForm')">重置</el-button>
+      </el-form-item>
+    </el-form>
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'AddParking',
+  data() {
+    return {
+      ruleForm: {
+        // phone: '',
+        carlicense: '',
+        time: ''
+      },
+      rules: {
+        // phone: [
+        //   {required: true, message: '请输入手机号', trigger: 'blur'},
+        //   {min: 11, max: 11, message: '请输入11位手机号', trigger: 'blur'}
+        // ],
+        carlicense: [
+          { required: true, message: '请输入车牌', trigger: 'blur' },
+          { min: 7, max: 8, message: '请输入正确车牌格式', trigger: 'blur' }
+        ],
+        time: [
+          { required: true, message: '请选择时间', trigger: 'blur' }
+        ]
+      }
+    }
+  },
+  methods: {
+    submitForm: function(formName) {
+      console.log(this.ruleForm)
+      var _this = this
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios.post('http://localhost:8080/parking/addParkingRecord', this.ruleForm).then(function(resp) {
+            console.log(resp.data)
+            if (resp.data.code === 20000) {
+              _this.$alert('添加成功', '提示', {
+                confirmButtonText: '确定',
+                callback: action => {
+                  _this.$router.push({
+                    path: '/manage/parkspace'
+                  })
+                }
+              })
+            } else {
+              _this.$message.error('添加失败--' + resp.data.message)
+            }
+          })
+        } else {
+          alert('error submit!')
+          return false
+        }
+      })
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields()
+    }
+
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
