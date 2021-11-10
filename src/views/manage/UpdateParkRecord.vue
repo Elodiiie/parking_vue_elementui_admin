@@ -96,6 +96,7 @@ export default {
           this.$axios.put('http://localhost:8080/parkrecord/updateParkRecord', this.ruleForm).then(function(resp) {
             console.log(resp)
             if (resp.data.code === 20000) {
+              _this.$axios.post('http://localhost:8080/parkrecord/sendMess', _this.ruleForm);
               _this.$alert('修改成功', '提示', {
                 confirmButtonText: '确定',
                 callback: action => {

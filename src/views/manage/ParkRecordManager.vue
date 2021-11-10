@@ -73,12 +73,28 @@
       </el-descriptions>
     </el-dialog>
     <el-dialog title="停车记录详细信息" :visible.sync="dialogTableVisible" :before-close="clearDetailData">
+      <el-descriptions class="margin-top" title="车牌信息" :column="3" border>
+        <el-descriptions-item>
+          <template slot="label">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-carlicense" />
+            </svg>
+            车牌号
+          </template>
+          {{ tmpCarlicense }}
+        </el-descriptions-item>
+      </el-descriptions>
       <el-table :data="detailData" style="padding: 20px">
         <el-table-column prop="username" label="用户名" width="140" />
-        <el-table-column prop="carlicense" label="车牌" width="120" />
         <el-table-column prop="entrancetime" label="入场时间" width="120" />
         <el-table-column prop="exittime" label="离场时间" width="120" />
         <el-table-column prop="fare" label="金额" width="100" />
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="edit(scope.row)">修改</el-button>
+            <el-button size="mini" @click="deleteById(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </el-dialog>
     <br>
@@ -103,7 +119,8 @@ export default {
       tableData: [],
       detailData: [],
       dialogTableVisible: false,
-      dialogDescriVisible: false
+      dialogDescriVisible: false,
+      tmpCarlicense: ''
     }
   },
   created() {
@@ -135,11 +152,12 @@ export default {
         _this.$message.warning('请输入查询内容')
       } else {
         this.$axios.get('http://localhost:8080/parkrecord/findDetailByCarlicense/' + _this.searchContent.trim()).then(function(resp) {
-          console.log(resp)
+          console.log(resp);
           if (resp.data === '') {
             _this.$message.error('该车辆暂未有停车记录或车辆不存在')
           } else {
-            _this.detailData = resp.data
+            _this.detailData = resp.data;
+            _this.tmpCarlicense = _this.searchContent.trim();
             _this.dialogTableVisible = true
           }
         })

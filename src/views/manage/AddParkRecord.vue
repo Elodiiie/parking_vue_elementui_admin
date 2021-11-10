@@ -10,8 +10,8 @@
       style="width:40%"
     >
 
-      <el-form-item label="车牌号" prop="carid">
-        <el-input v-model="ruleForm.carid" />
+      <el-form-item label="车号|数字" prop="carid">
+        <el-input v-model="ruleForm.carid" oninput="value=value.replace(/[^0-9.]/g,'')" />
       </el-form-item>
 
       <el-form-item label="进出时间" required>
@@ -54,7 +54,7 @@ export default {
       },
       rules: {
         carid: [
-          { required: true, message: '请输入车牌号', trigger: 'blur' }
+          { required: true, message: '请输入车牌号|只允许数字', trigger: 'blur' }
         ],
         charge: [
           { required: true, message: '请选择扣费金额', trigger: 'change' }
@@ -82,6 +82,7 @@ export default {
           this.$axios.post('http://localhost:8080/parkrecord/addRecord', this.ruleForm).then(function(resp) {
             console.log(resp)
             if (resp.data) {
+              _this.$axios.post('http://localhost:8080/parkrecord/sendMess', _this.ruleForm);
               _this.$alert('添加成功', '提示', {
                 confirmButtonText: '确定',
                 callback: action => {
