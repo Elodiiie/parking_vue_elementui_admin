@@ -257,7 +257,6 @@ export const asyncRoutes = [
       }
     ]
   },
-
   {
     path: '/lpr',
     component: Layout,
@@ -275,6 +274,18 @@ export const asyncRoutes = [
         component: () => import('@/views/lpr/hyperlpr'),
         name: 'lpr',
         meta: { title: '系统监控', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/feedback',
+    component: Layout,
+    children: [
+      {
+        path: '/feedback',
+        component: () => import('@/views/feedback/Feedback'),
+        name: 'feedback',
+        meta: { title: '问题反馈', icon: 'el-icon-chat-line-square', noCache: true }
       }
     ]
   },
@@ -537,13 +548,13 @@ const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
-})
+});
 
-const router = createRouter()
+const router = createRouter();
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
-  const newRouter = createRouter()
+  const newRouter = createRouter();
   router.matcher = newRouter.matcher // reset router
 }
 

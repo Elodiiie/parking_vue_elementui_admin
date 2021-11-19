@@ -5,7 +5,7 @@
 <script>
 
 export default {
-  name: 'FinanceDocu',
+  name: 'FeedbackDocu',
   data() {
     return {
       articleList: [
