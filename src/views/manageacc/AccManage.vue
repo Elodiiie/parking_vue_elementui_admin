@@ -17,7 +17,7 @@
     </el-button>
     <el-button circle type="success" size="small" icon="el-icon-refresh" @click="returnHome" />
     <br>
-    <el-table :data="tableData" style="padding: 20px">
+    <el-table :data="tableData" style="padding: 20px" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" size="mini">

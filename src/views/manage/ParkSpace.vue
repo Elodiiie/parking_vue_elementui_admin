@@ -15,7 +15,7 @@
           <count-to :start-val="0" :end-val="endVal3" :duration="3200" class="card-panel-num" />/{{ space }}
         </div>
       </div>
-      <el-table :data="tableData" border fit highlight-current-row style="width: 55%;margin-top: 15px">
+      <el-table :data="tableData" border fit highlight-current-row style="width: 55%;margin-top: 15px" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
         <el-table-column label="username" width="150">
           <template slot-scope="scope">
             <span>{{ scope.row.username }}</span>

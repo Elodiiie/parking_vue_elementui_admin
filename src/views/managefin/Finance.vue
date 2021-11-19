@@ -20,7 +20,7 @@
       <el-col style="width: 50%">
         <div>
           <div v-if="tablenum===0">
-            <el-table :data="tableData" border fit highlight-current-row style="width: 80%;margin-left:5%;margin-top: 1%">
+            <el-table :data="tableData" border fit highlight-current-row style="width: 80%;margin-left:5%;margin-top: 1%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
               <el-table-column label="Username" width="100">
                 <template slot-scope="scope">
                   {{ scope.row.username }}
@@ -45,7 +45,7 @@
             </el-table>
           </div>
           <div v-else>
-            <el-table :data="tableData" border fit highlight-current-row style="width: 90%;margin-left:5%;margin-top: 1%">
+            <el-table :data="tableData" border fit highlight-current-row style="width: 90%;margin-left:5%;margin-top: 1%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
               <el-table-column label="Username" width="100">
                 <template slot-scope="scope">
                   {{ scope.row.username }}

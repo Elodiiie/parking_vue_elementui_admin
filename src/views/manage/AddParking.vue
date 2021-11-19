@@ -69,6 +69,7 @@ export default {
           this.$axios.post('http://localhost:8080/parking/addParkingRecord', this.ruleForm).then(function(resp) {
             console.log(resp.data)
             if (resp.data.code === 20000) {
+              _this.$axios.post('http://localhost:8080/parking/sendMess', _this.ruleForm);
               _this.$alert('添加成功', '提示', {
                 confirmButtonText: '确定',
                 callback: action => {

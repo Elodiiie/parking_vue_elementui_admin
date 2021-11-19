@@ -11,7 +11,7 @@
     <el-button type="primary" icon="el-icon-plus" @click="add">增加车辆</el-button>
     <el-button circle type="success" size="small" icon="el-icon-refresh" @click="returnHome" />
     <br>
-    <el-table :data="tableData" style="padding: 20px">
+    <el-table :data="tableData" style="padding: 20px" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
       <el-table-column prop="carid" label="ID" width="140" />
       <el-table-column prop="username" label="车主" width="140" />
       <el-table-column prop="carlicense" label="车牌" width="120" />
@@ -36,7 +36,7 @@
         append-to-body
         :before-close="clearInnerDetailData"
       >
-        <el-table :data="innerDetailData" max-height="250">
+        <el-table :data="innerDetailData" max-height="250" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
           <el-table-column property="username" label="用户" width="70" />
           <el-table-column property="carlicense" label="车牌" width="100" />
           <el-table-column property="entrancetime" label="入场时间" width="100" />

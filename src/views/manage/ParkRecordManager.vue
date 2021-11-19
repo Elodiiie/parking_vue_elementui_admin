@@ -10,7 +10,7 @@
     <el-button type="primary" icon="el-icon-plus" @click="addparkRecord">添加</el-button>
     <el-button circle type="success" size="small" icon="el-icon-refresh" @click="returnHome" />
     <br>
-    <el-table :data="tableData" style="padding: 20px">
+    <el-table :data="tableData" style="padding: 20px" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
       <el-table-column prop="parkrecordid" label="id" width="140" />
       <el-table-column prop="carlicense" label="车牌" width="120" />
       <el-table-column prop="entrancetime" label="入场时间" width="120" />
@@ -84,7 +84,7 @@
           {{ tmpCarlicense }}
         </el-descriptions-item>
       </el-descriptions>
-      <el-table :data="detailData" style="padding: 20px">
+      <el-table :data="detailData" style="padding: 20px" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
         <el-table-column prop="username" label="用户名" width="140" />
         <el-table-column prop="entrancetime" label="入场时间" width="120" />
         <el-table-column prop="exittime" label="离场时间" width="120" />
